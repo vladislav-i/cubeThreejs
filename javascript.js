@@ -43,11 +43,17 @@ var scene = new THREE.Scene(); //creat scene
 
 //normal material for mesh, creating cube
 //cube has x,y,z = all set to 200
-var cube  = new THREE.Mesh(new THREE.CubeGeometry(200,200,200), new THREE.MeshBasicMaterial({
+var cube  = new THREE.Mesh(new THREE.CubeGeometry(200,200,200), new THREE.MeshLambertMaterial({
 	color: '#EE00FF',
-	wireframe: 'true',
-	wireframeLinewidth: "10"
+
+
 }));
+
+//creating light
+var light = new THREE.DirectionalLight("white");
+light.position.set(0,-400,400).normalize(); //position light
+scene.add(light); //adding light to scene
+
 
 //rotating cube 
 cube.rotation.z = 45*(Math.PI/180);

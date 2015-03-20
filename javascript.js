@@ -1,35 +1,26 @@
+
+//need window on load to execute javascript
 window.onload = function() {
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-	//create webGL rended object
-	var renderer = new THREE.WebGLRenderer();
-	renderer.setSize( 800, 600 );
-	document.body.appendChild( renderer.domElement );
+//create camera/set
+var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
+//set position
 
-	var scene = new THREE.Scene();
+//starting at center point 
+camera.position.y= -450; //y position, new and far
+camera.position.z=400; //z is up and down
+camera.rotation.x= .75; //left and right
 
-	//create camera 
-	var camera = new THREE.PerspectiveCamera(
-	35,             // Field of view
-	800 / 600,      // Aspect ratio
-	0.1,            // Near plane
-	10000           // Far plane
-	);
-	camera.position.set( -15, 10, 10 );
-	camera.lookAt( scene.position );
+var scene = new THREE.Scene(); //creat scene
 
+//normal material for mesh
+var plane = new THREE.Mesh(new THREE.PlaneGeometry(300,300), new THREE.MeshNormalMaterial());
 
-	//create Cube
-
-	var geometry = new THREE.CubeGeometry( 5, 5, 5 );
-	var material = new THREE.MeshLambertMaterial( { color: 0xFF0000 } );
-	var mesh = new THREE.Mesh( geometry, material );
-	scene.add( mesh );
-
-	//adding light to scene 
-	var light = new THREE.PointLight( 0xFFFF00 );
-	light.position.set( 10, 0, 10 );
-	scene.add( light );
-
-	renderer.render( scene, camera );
-
-    };
+//adding plane to scene
+scene.add(plane);
+//rendere this scene with this camera
+renderer.render(scene, camera);
+};

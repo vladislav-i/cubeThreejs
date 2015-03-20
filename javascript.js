@@ -10,13 +10,15 @@ function animate(){
 	var time = (new Date).getTime();
 	var timeDiff = time - lastTime; //get difference in time
 	var angularChange = angularSpeed * timeDiff * 2 * Math.PI/1000;
+
 	cube.rotation.z += angularChange; // taking current position and moving it
 	cube.rotation.x += angularChange;
 	cube.rotation.y += angularChange;
+
 	lastTime = time; // update current time
 
 	//rendere this scene with this camera
-	renderer.render(scene, camera);
+	renderer.render(scene, camera); 
 
 	requestAnimationFrame(function(){
 		animate();
@@ -41,7 +43,11 @@ var scene = new THREE.Scene(); //creat scene
 
 //normal material for mesh, creating cube
 //cube has x,y,z = all set to 200
-var cube  = new THREE.Mesh(new THREE.CubeGeometry(200,200,200), new THREE.MeshNormalMaterial());
+var cube  = new THREE.Mesh(new THREE.CubeGeometry(200,200,200), new THREE.MeshBasicMaterial({
+	color: '#EE00FF',
+	wireframe: 'true',
+	wireframeLinewidth: "10"
+}));
 
 //rotating cube 
 cube.rotation.z = 45*(Math.PI/180);
